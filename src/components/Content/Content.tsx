@@ -12,6 +12,10 @@ type Props = {
 }
 
 
+let paramsRequired = "Params is required ?name=example&age=29&timestamp=1624298113" 
+let ageError = "age required a number"
+let timestampError = "timestamp required a number"
+let success = "Request seccess"
 const Content: FC<Props> = ({ children }) => {
 
   let result = useAppSelector((state) => state.counterSlice.result)
@@ -19,21 +23,23 @@ const Content: FC<Props> = ({ children }) => {
   const [error, setError] = useState<null | string>(null)
   let { timestamp, name, age } = useParamsUrl<ParametersType>()
 
+  let styleErrors = { width: "400px", marginTop: "20px" }
+
   return <div style={{ margin: "40px" }}>
     <div>Name:{name ? name : "undefined"}</div>
     <div>Age:{age ? age : "undefined"}</div>
     <div>Timestamp:{timestamp ? timestamp : "undefined"}</div>
 
-    {(!name || !age || !timestamp) && <div>Params is required ?name=example&age=29&timestamp=1624298113</div>}
+    {(!name || !age || !timestamp) && <Alert message={paramsRequired} style={styleErrors} type="error"></Alert>}
 
-    {name && age && timestamp && <Button style={{ marginTop: "10px"}}onClick={() => {
+    {name && age && timestamp && <Button style={{ marginTop: "10px"}} onClick={() => {
       if (timestamp && name && age) {
         if (isNaN(+age)) {
-          setError("age required a number")
+          setError(ageError)
           return
         }
         if (isNaN(+timestamp)) {
-          setError("timestamp required a number")
+          setError(timestampError)
           return
         }
 
@@ -42,8 +48,8 @@ const Content: FC<Props> = ({ children }) => {
       }
     }} type="primary">Send Meta</Button>}
 
-    {result === "success" && <Alert style={{ width: "300px", marginTop: "20px" }} message="Request seccess" type="success" />}
-    {error && <Alert style={{ width: "300px", marginTop: "20px" }} message={error} type="error" />}
+    {result === "success" && <Alert style={styleErrors} message={success} type="success" />}
+    {error && <Alert style={styleErrors} message={error} type="error" />}
   </div>
 }
 
