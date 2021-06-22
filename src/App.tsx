@@ -44,7 +44,7 @@ function App() {
       <Switch>
         <AppDivStyle >
           <ContentSectionStyle>
-             <Route path='/' component={Content} /> 
+             <Route path='/urlParse' component={Content} /> 
           </ContentSectionStyle>
         </AppDivStyle>
       </Switch>

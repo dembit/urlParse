@@ -22,7 +22,7 @@
     "@types/styled-components": "^5.1.9",
     "antd": "^4.15.4",
     "axios": "^0.21.1",
-    "gh-pages": "^3.2.0",
+    "gh-pages": "3.2.0",
     "history": "^5.0.0",
     "less": "^4.1.1",
     "less-loader": "^8.1.1",
